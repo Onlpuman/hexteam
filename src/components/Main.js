@@ -175,6 +175,7 @@ export const Main = props => {
 				</Modal>
 			)}
 			<span>*Click on the column name to sort</span>
+			<span>*Click on the short link to copy it</span>
 		</>
 	);
 };
