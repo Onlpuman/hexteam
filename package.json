@@ -1,5 +1,6 @@
 {
 	"name": "hexteam",
+	"homepage": "https://onlpuman.github.io/hexteam/",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
@@ -22,7 +23,9 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"lint": "eslint .",
-		"lint:fix": "npm run lint -- --fix"
+		"lint:fix": "npm run lint -- --fix",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build"
 	},
 	"browserslist": {
 		"production": [
@@ -37,6 +40,7 @@
 		]
 	},
 	"devDependencies": {
-		"gh-pages": "^4.0.0"
+		"gh-pages": "^4.0.0",
+		"i": "^0.3.7"
 	}
 }
