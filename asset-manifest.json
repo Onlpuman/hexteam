@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/auth/static/css/main.6b9111a7.css",
-    "main.js": "/auth/static/js/main.041d2f78.js",
-    "index.html": "/auth/index.html",
-    "main.6b9111a7.css.map": "/auth/static/css/main.6b9111a7.css.map",
-    "main.041d2f78.js.map": "/auth/static/js/main.041d2f78.js.map"
+    "main.css": "/hexteam/static/css/main.6b9111a7.css",
+    "main.js": "/hexteam/static/js/main.8d1e818f.js",
+    "index.html": "/hexteam/index.html",
+    "main.6b9111a7.css.map": "/hexteam/static/css/main.6b9111a7.css.map",
+    "main.8d1e818f.js.map": "/hexteam/static/js/main.8d1e818f.js.map"
   },
   "entrypoints": [
     "static/css/main.6b9111a7.css",
-    "static/js/main.041d2f78.js"
+    "static/js/main.8d1e818f.js"
   ]
 }
