@@ -32,7 +32,7 @@ export const Registration = () => {
 				setRegSuccess(true);
 			})
 			.catch(function (error) {
-				setError(error.response.data.detail || 'Unknown error');
+				setError(error?.response?.data?.detail || 'Unknown error');
 			});
 	};
 
@@ -62,7 +62,7 @@ export const Registration = () => {
 				</Row>
 				<Button type="submit">Send</Button>
 			</Form>
-			<Link to="/">Already registered?</Link>
+			<Link className="mb-3" to="/">Already registered?</Link>
 			{error && (
 				<Alert variant={'danger'}>
 					{error}
@@ -70,7 +70,7 @@ export const Registration = () => {
 			)}
 			{regSuccess && (
 				<Alert variant={'success'}>
-					Regitration successful, you can <Link to="/auth">authorize now</Link>.
+					Regitration successful, you can <Link to="/hexteam">authorize now</Link>.
 				</Alert>
 			)}
 		</>

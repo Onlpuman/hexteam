@@ -33,15 +33,14 @@ export const Authorization = props => {
 				username,
 				password,
 			}))
-			.then(function (response) {
+			.then(response => {
 				const { access_token, token_type } = response.data;
 				axios.defaults.headers.common = { 'Authorization': `${token_type} ${access_token}` };
 				setAuthorized(true);
 				navigate('/');
 			})
-			.catch(function (error) {
-				console.log(error);
-				setError(error.response.data.detail || 'Unknown error');
+			.catch(error => {
+				setError(error?.response?.data?.detail || 'Unknown error');
 			});
 	};
 
@@ -71,7 +70,7 @@ export const Authorization = props => {
 				</Row>
 				<Button type="submit">Submit</Button>
 			</Form>
-			<Link to="/reg">Not registered?</Link>
+			<Link className="mb-3" to="/reg">Not registered?</Link>
 			{error && (
 				<Alert variant={'danger'}>
 					{error}
