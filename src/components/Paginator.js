@@ -6,8 +6,8 @@ export const Paginator = (props) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const pagesTotal = useRef();
 	const defaultLimit = 10;
-	const maxPagesShown = pagesTotal.current;
 	pagesTotal.current = Math.ceil(statistics.length / defaultLimit);
+	const maxPagesShown = pagesTotal.current;
 
 	const handleFirst = () => {
 		setOffset(0);
@@ -77,9 +77,8 @@ export const Paginator = (props) => {
 				<Pagination.Ellipsis disabled />
 			)}
 			<Pagination.Next onClick={handleNext} disabled={currentPage === pagesTotal.current}/>
-			<Pagination.Last onClick={handleLast} disabled={statistics.length < 11}/>
+			<Pagination.Last onClick={handleLast} disabled={currentPage === pagesTotal.current}/>
 		</Pagination>
 	);
 };
-
 
