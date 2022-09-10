@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/hexteam/static/css/main.6b9111a7.css",
-    "main.js": "/hexteam/static/js/main.8d1e818f.js",
+    "main.js": "/hexteam/static/js/main.9e1918b0.js",
     "index.html": "/hexteam/index.html",
     "main.6b9111a7.css.map": "/hexteam/static/css/main.6b9111a7.css.map",
-    "main.8d1e818f.js.map": "/hexteam/static/js/main.8d1e818f.js.map"
+    "main.9e1918b0.js.map": "/hexteam/static/js/main.9e1918b0.js.map"
   },
   "entrypoints": [
     "static/css/main.6b9111a7.css",
-    "static/js/main.8d1e818f.js"
+    "static/js/main.9e1918b0.js"
   ]
 }
