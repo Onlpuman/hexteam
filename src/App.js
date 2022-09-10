@@ -13,13 +13,13 @@ function App() {
 
 	return (
 		<div className="App">
-			<BrowserRouter>
+			<BrowserRouter basename="/hexteam">
 				<Routes>
-					<Route path={'/auth'} element={<Authorization setAuthorized={setAuthorized} />} />
+					<Route exact path="/hexteam" element={<Authorization setAuthorized={setAuthorized} />} />
 					<Route path={'/reg'} element={<Registration />} />
 					<Route path={'/'} element={authorized
 						? <Main setAuthorized={setAuthorized} />
-						: <Navigate to={'/auth'}/>}
+						: <Navigate to={'/hexteam'}/>}
 					/>
 				</Routes>
 			</BrowserRouter>
@@ -29,5 +29,3 @@ function App() {
 }
 
 export default App;
-
-
