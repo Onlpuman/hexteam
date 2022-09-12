@@ -15,11 +15,11 @@ export const ModalButtons = props => {
 
 		axios
 			.post(`http://79.143.31.216/squeeze?link=${currentInput}`)
-			.then(function (response) {
+			.then(response => {
 				const { short } = response.data;
 				setSqueezed(short);
 			})
-			.catch(function (error) {
+			.catch(error => {
 				console.log(error);
 			});
 	};
