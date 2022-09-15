@@ -4,13 +4,11 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { sortByTextField } from '../lib/sortByTextField';
-import { sortByDigit } from '../lib/sortByDigit';
+import { getUrl } from '../requests/getUrl';
 import { copyToClipboard } from '../lib/copyToClipboard';
 
 import { Paginator } from './Paginator';
 import { ModalButtons } from './ModalButtons';
-
 
 export const Main = props => {
 	const { setAuthorized } = props;
@@ -25,7 +23,6 @@ export const Main = props => {
 	const [sort, setSort] = useState('');
 	const limit = 10;
 
-
 	useEffect(() => {
 		axios
 			.get('http://79.143.31.216/statistics')
@@ -34,11 +31,17 @@ export const Main = props => {
 	}, [squeezed]);
 
 	useEffect(() => {
+		const link = getUrl(({
+			offset,
+			limit,
+			sort,
+		}));
+
 		axios
-			.get(`http://79.143.31.216/statistics?offset=${offset}&limit=${limit}`)
+			.get(link)
 			.then(response => setCurrentStatistics(response.data))
 			.catch(error => setError(error?.response?.data?.detail || 'Unknown error'));
-	}, [offset, squeezed]);
+	}, [offset, squeezed, sort]);
 
 	const handleLogout = () => {
 		setAuthorized(false);
@@ -55,45 +58,20 @@ export const Main = props => {
 		setCurrentInput('');
 	};
 
-	const handleSortByShortName = () => {
-		const sortedData = sortByTextField({
-			data: currentStatistics,
-			sort,
-			sortField: 'short',
-		});
-		if (sort === '' || sort === 'decrease') {
-			setSort('increase');
-		} else {
-			setSort('decrease');
+	const handleSort = (e) => {
+		const entity = e.target.dataset.entity;
+		if (sort.includes('asc')) {
+			setSort(`desc_${entity}`);
+			return null;
 		}
-		setCurrentStatistics(sortedData);
+		setSort(`asc_${entity}`);
 	};
 
-	const handleSortByName = () => {
-		const sortedData = sortByTextField({
-			data: currentStatistics,
-			sort,
-			sortField: 'target',
-		});
-		if (sort === '' || sort === 'decrease') {
-			setSort('increase');
-		} else {
-			setSort('decrease');
+	const handleResetSort = () => {
+		if (sort !== '') {
+			setSort('');
 		}
-		setCurrentStatistics(sortedData);
-	};
-
-	const handleSortByDigit = () => {
-		const sortedData = sortByDigit({
-			data: currentStatistics,
-			sort,
-		});
-		if (sort === '' || sort === 'decrease') {
-			setSort('increase');
-		} else {
-			setSort('decrease');
-		}
-		setCurrentStatistics(sortedData);
+		return null;
 	};
 
 	const handleCopyLink = (e) => {
@@ -121,11 +99,17 @@ export const Main = props => {
 					</div>
 					<Table striped bordered hover>
 						<thead>
-							<tr>
+							<tr onClick={handleSort}>
 								<th>№</th>
-								<th onClick={handleSortByShortName}>Short link</th>
-								<th onClick={handleSortByName}>Original link</th>
-								<th onClick={handleSortByDigit}>Count of click</th>
+								<th data-entity={'short'}>
+									Short link
+								</th>
+								<th data-entity={'target'}>
+									Original link
+								</th>
+								<th data-entity={'counter'}>
+									Count of click
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -184,6 +168,7 @@ export const Main = props => {
 					)}
 					<span>*Click on the column name to sort</span>
 					<span>*Click on the short link to copy it</span>
+					<span onClick={handleResetSort}>*Click here to reset the sorting</span>
 				</>
 			)
 	);
