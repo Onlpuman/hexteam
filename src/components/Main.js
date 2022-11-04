@@ -24,13 +24,22 @@ export const Main = props => {
 	const limit = 10;
 
 	useEffect(() => {
+		const cancelToken = axios.CancelToken.source();
 		axios
-			.get('http://79.143.31.216/statistics')
+			.get('https://jsonplaceholder.typicode.com/posts?_limit=5', { cancelToken: cancelToken.token })
 			.then(response => setStatistics(response.data))
-			.catch(error => setError(error?.response?.data?.detail || 'Unknown error'));
+			.catch(error => {
+				if (axios.isCancel(error)) {
+					console.log('error')
+					setError(error?.response?.data?.detail || 'Unknown error');
+				}
+			});
+		return () => cancelToken.cancel();
 	}, [squeezed]);
 
-	useEffect(() => {
+		useEffect(() => {
+		const cancelToken = axios.CancelToken.source();
+
 		const link = getUrl(({
 			offset,
 			limit,
@@ -38,9 +47,14 @@ export const Main = props => {
 		}));
 
 		axios
-			.get(link)
+			.get(link, { cancelToken: cancelToken.token })
 			.then(response => setCurrentStatistics(response.data))
-			.catch(error => setError(error?.response?.data?.detail || 'Unknown error'));
+			.catch(error => {
+				if (axios.isCancel(error)) {
+					setError(error?.response?.data?.detail || 'Unknown error')
+				}
+			});
+		return () => cancelToken.cancel();
 	}, [offset, squeezed, sort]);
 
 	const handleLogout = () => {
